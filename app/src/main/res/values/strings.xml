@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">ProjectTest</string>
+    <string name="Welcome_Splash">Welcome To Application</string>
+    <string name="Username">Username</string>
+    <string name="Password">Password</string>
+    <string name="Login">Login</string>
+    <string name="SignUp">SignUp</string>
+    <string name="SignUpform">SignUp Form</string>
+    <string name="Name">Name </string>
+    <string name="Email">Email </string>
+    <string name="State">State </string>
+    <string name="City">City </string>
+    <string name="Phone">Mobile.No </string>
+
+    <string-array name="state">
+        <item>Andra Pradesh</item>
+        <item>Arunachal Pradesh</item>
+        <item>Assam</item>
+        <item>Bihar</item>
+        <item>Chhattisgarh</item>
+        <item>Goa</item>
+        <item>Gujarat</item>
+        <item>Haryana</item>
+        <item>Assam</item>
+        <item>Himachal Pradesh</item>
+        <item>Chhattisgarh</item>
+        <item>Jammu and Kashmir</item>
+        <item>Jharkhand</item>
+        <item>Karnataka</item>
+        <item>Kerala</item>
+        <item>Madya Pradesh</item>
+        <item>Maharashtra</item>
+        <item>Manipur</item>
+        <item>Meghalaya</item>
+        <item>Mizoram</item>
+        <item>Nagaland</item>
+        <item>Orissa</item>
+        <item>Punjab</item>
+        <item>Rajasthan</item>
+        <item>Sikkim</item>
+        <item>Tamil Nadu</item>
+        <item>Telagana</item>
+        <item>Tripura</item>
+        <item>Uttaranchal</item>
+        <item>Uttar Pradesh</item>
+        <item>West Bengal</item>
+    </string-array>
+
+    <string-array name="uttar_pradesh_city">
+        <item>Agra</item>
+        <item>Aligarh</item>
+        <item>Firozabad</item>
+        <item>Mathura</item>
+        <item>Shikohabad</item>
+    </string-array>
+</resources>
