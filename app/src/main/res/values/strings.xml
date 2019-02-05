@@ -11,46 +11,25 @@
     <string name="State">State </string>
     <string name="City">City </string>
     <string name="Phone">Mobile.No </string>
+    <string name="drawer_name">Shubham Pratap</string>
 
-    <string-array name="state">
-        <item>Andra Pradesh</item>
-        <item>Arunachal Pradesh</item>
-        <item>Assam</item>
-        <item>Bihar</item>
-        <item>Chhattisgarh</item>
-        <item>Goa</item>
-        <item>Gujarat</item>
-        <item>Haryana</item>
-        <item>Assam</item>
-        <item>Himachal Pradesh</item>
-        <item>Chhattisgarh</item>
-        <item>Jammu and Kashmir</item>
-        <item>Jharkhand</item>
-        <item>Karnataka</item>
-        <item>Kerala</item>
-        <item>Madya Pradesh</item>
-        <item>Maharashtra</item>
-        <item>Manipur</item>
-        <item>Meghalaya</item>
-        <item>Mizoram</item>
-        <item>Nagaland</item>
-        <item>Orissa</item>
-        <item>Punjab</item>
-        <item>Rajasthan</item>
-        <item>Sikkim</item>
-        <item>Tamil Nadu</item>
-        <item>Telagana</item>
-        <item>Tripura</item>
-        <item>Uttaranchal</item>
-        <item>Uttar Pradesh</item>
-        <item>West Bengal</item>
-    </string-array>
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
 
     <string-array name="uttar_pradesh_city">
+        <item>Choose City</item>
         <item>Agra</item>
         <item>Aligarh</item>
         <item>Firozabad</item>
         <item>Mathura</item>
         <item>Shikohabad</item>
     </string-array>
+
+    <string-array name="state">
+        <item name="Choose_State">Choose State</item>
+    </string-array>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

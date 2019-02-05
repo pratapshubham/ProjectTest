@@ -15,6 +15,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.braintech.projecttest.Model.Temp;
+import com.example.braintech.projecttest.Model.UserModel;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,14 +27,13 @@ import retrofit2.Response;
 
 public class SignupActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    EditText editext_name,editText_email,editText_phone;
+    EditText editext_name,editText_email,editText_phone,edt_password;
     Button button_signup;
     Spinner spn_state,spn_city;
-    String usr_name,usr_email,usr_phone;
+    String usr_name,usr_email,usr_phone,usr_password,usr_state,usr_city;
     private ApiInterface apiInterface;
     ArrayAdapter<String> adapter;
     ArrayList<Datum> data ;
-    AlertDialog.Builder builder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,32 +67,52 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
           }
       });
 
+
+        DatabaseHandlerClass databaseHandler = new DatabaseHandlerClass(getApplicationContext());
+        Temp.setDatabaseHandler(databaseHandler);
+        databaseHandler = Temp.getDatabaseHandler();
+
+        final DatabaseHandlerClass finalDatabaseHandler = databaseHandler;
+
+
         button_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 usr_name = editext_name.getText().toString();
                 usr_email = editText_email.getText().toString();
                 usr_phone = editText_phone.getText().toString();
-
+                usr_password = edt_password.getText().toString();
+                usr_state = spn_state.getSelectedItem().toString();
+                usr_city = spn_city.getSelectedItem().toString();
                 if (validation())
                 {
-                    builder = new AlertDialog.Builder(SignupActivity.this);
-                    builder.setTitle("SignUp Successfull");
-                    builder.setMessage("Congrats ! Your SignUp Has Been Done");
-                    builder.setCancelable(true);
-                    builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            startActivity(new Intent(SignupActivity.this,LoginActivity.class));
-                            finish();
+                    UserModel userModel = new UserModel(usr_name,usr_email,usr_state,usr_city,usr_phone,usr_password);
+                    userModel.setName(usr_name);
+                    userModel.setEmail(usr_email);
+                    userModel.setState(usr_state);
+                    userModel.setCity(usr_city);
+                    userModel.setMobile(usr_phone);
+                    userModel.setPassword(usr_password);
+                    Boolean mail_check = finalDatabaseHandler.checkmail(usr_email);
+                    if (mail_check == true) {
+                        int i = finalDatabaseHandler.insertdata(userModel);
+                        if (i == 1) {
+                            editext_name.getText().clear();
+                            editText_email.getText().clear();
+                            editText_phone.getText().clear();
+                            edt_password.getText().clear();
+                            Toast.makeText(getApplication(), "Data Inserted", Toast.LENGTH_SHORT).show();
                         }
-                    });
-                    builder.show();
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplication(), "Email Already Exists", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
 
-        spn_state.setOnItemSelectedListener(this);
+         spn_state.setOnItemSelectedListener(this);
     }
 
 
@@ -120,6 +142,12 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
             editText_phone.requestFocus();
             return false;
         }
+        else if(usr_password.isEmpty())
+        {
+            editText_phone.setError("Enter Password");
+            editText_phone.requestFocus();
+            return false;
+        }
         return true;
     }
     public void getAllid()
@@ -127,6 +155,7 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
         editext_name = (EditText) findViewById(R.id.edt_name);
         editText_email = (EditText)findViewById(R.id.edt_email);
         editText_phone = (EditText)findViewById(R.id.edt_phone);
+        edt_password = (EditText)findViewById(R.id.edt_signup_password);
         button_signup = (Button)findViewById(R.id.btn_Signup);
         spn_state = (Spinner) findViewById(R.id.spinner_state);
         spn_city = (Spinner)findViewById(R.id.spinner_city);
@@ -136,7 +165,7 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String selectedCountry = parent.getSelectedItem().toString();
-        Toast.makeText(getApplicationContext(),"You Selected : "+selectedCountry,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(),"You Selected : "+selectedCountry,Toast.LENGTH_SHORT).show();
     }
 
     @Override

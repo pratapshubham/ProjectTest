@@ -19,4 +19,7 @@
 
     <dimen name="txt_size_12sp">12sp</dimen>
     <dimen name="margin_30dp">30dp</dimen>
+
+    <dimen name="layout_height_160dp">160dp</dimen>
+    <dimen name="padding_10dp">10dp</dimen>
 </resources>

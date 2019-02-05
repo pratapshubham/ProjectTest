@@ -3,10 +3,14 @@ package com.example.braintech.projecttest;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.braintech.projecttest.Model.Temp;
 
 import org.w3c.dom.Text;
 
@@ -16,6 +20,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView txt_signup;
     Button btnLogin;
     String str_username,str_password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +28,12 @@ public class LoginActivity extends AppCompatActivity {
         setTitle("Login Form");
 
         getId();
+
+        DatabaseHandlerClass databaseHandler = new DatabaseHandlerClass(getApplicationContext());
+        Temp.setDatabaseHandler(databaseHandler);
+        databaseHandler = Temp.getDatabaseHandler();
+
+        final DatabaseHandlerClass finalDatabaseHandler = databaseHandler;
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -30,11 +41,21 @@ public class LoginActivity extends AppCompatActivity {
                 str_password = edt_password.getText().toString();
                 if (Validate())
                 {
+                    Boolean authenticateuser = finalDatabaseHandler.AuthenticateUser(str_username,str_password);
 
+                    if (authenticateuser == true)
+                    {
+                    startActivity(new Intent(LoginActivity.this,HomepageActivity.class));
+                    edt_username.getText().clear();
+                    edt_password.getText().clear();
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplication(), "Failed to log in , please try again", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
-
         txt_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,6 +81,11 @@ public class LoginActivity extends AppCompatActivity {
             edt_username.setError("Username Can't be Blank");
             edt_username.requestFocus();
             return false;
+        }
+        else if (!Patterns.EMAIL_ADDRESS.matcher(str_username).matches())
+        {
+            edt_username.setError("Invalid Email");
+            edt_username.requestFocus();
         }
         else if (str_password.isEmpty())
         {

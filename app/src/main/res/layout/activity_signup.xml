@@ -49,6 +49,7 @@
                  android:layout_marginTop="@dimen/margin_top5"
                  android:background="@drawable/edt_bg"
                  android:maxLength="30"
+                 android:inputType="text"
                  android:paddingLeft="@dimen/padding_20"
                 android:textColor="@color/white"
                  android:drawableLeft="@drawable/name_clipart"
@@ -96,7 +97,9 @@
                 android:layout_height="wrap_content"
                 android:drawSelectorOnTop="true"
                 android:layout_below="@+id/txt_state"
-                android:layout_marginTop="@dimen/margin_top20">
+                android:layout_marginTop="@dimen/margin_top20"
+                android:background="@drawable/edt_bg"
+                >
 
             </Spinner>
 
@@ -118,6 +121,8 @@
                  android:drawSelectorOnTop="true"
                  android:entries="@array/uttar_pradesh_city"
                  android:layout_below="@+id/txt_city"
+                 android:background="@drawable/edt_bg"
+                 android:padding="10dp"
                  android:layout_marginTop="@dimen/margin_top20">
 
              </Spinner>
