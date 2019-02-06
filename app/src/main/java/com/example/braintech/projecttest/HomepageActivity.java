@@ -43,6 +43,8 @@ public class HomepageActivity extends AppCompatActivity implements NavigationVie
         toggle.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -56,7 +58,6 @@ public class HomepageActivity extends AppCompatActivity implements NavigationVie
                         homefragment = new ProfileFragment();
                         loadFragment(homefragment);
                         break;
-
                 }
             }
 
