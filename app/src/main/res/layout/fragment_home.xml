@@ -1,19 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeFragment"
-
+    android:layout_marginBottom="@dimen/margin_60dp"
     >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
+        android:id="@+id/relative_homefragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Welcome to  HomePage"
-        android:textSize="@dimen/margin_30dp"
-        android:textAlignment="center"
-        />
+        android:layout_marginBottom="@dimen/margin_60dp">
+        <TextView
+            android:id="@+id/txt_pagetitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/txt_size_30sp"
+            android:layout_marginTop="@dimen/margin_30dp"
+            android:textAlignment="center"
+            android:textColor="@color/colorPurple_A400"
+            />
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/txt_discription"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layout_height_350dp"
+            android:layout_below="@+id/txt_pagetitle"
+            android:textSize="@dimen/text_size20"
+            android:layout_marginTop="@dimen/margin_30dp"
+            android:textAlignment="center"
+            android:textColor="@color/colorPurple_900"
+            android:scrollbars="vertical"
+            />
+
+    </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

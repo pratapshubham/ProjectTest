@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileFragment"
+    android:orientation="horizontal"
+    android:weightSum="2"
+    >
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_weight="1.50"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/txt_fragmentUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Name"
+            android:textSize="@dimen/txt_size_30sp"
+            />
+
+        <TextView
+            android:id="@+id/txt_fragmentEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top20"
+            android:text="@string/Email"
+            android:textSize="@dimen/txt_size_30sp"
+            />
+
+        <TextView
+        android:id="@+id/txt_fragmentState"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top20"
+        android:text="@string/State"
+        android:textSize="@dimen/txt_size_30sp"
+        />
+
+        <TextView
+            android:id="@+id/txt_fragmentCity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top20"
+            android:text="@string/City"
+            android:textSize="@dimen/txt_size_30sp"
+            />
+
+        <TextView
+            android:id="@+id/txt_fragmentMobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top20"
+            android:text="@string/Phone"
+            android:textSize="@dimen/txt_size_30sp"
+            />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight=".55"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/txt_fragment_Username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Name"
+            android:textSize="@dimen/txt_size_30sp"
+            />
+
+        <TextView
+            android:id="@+id/txt_fragment_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top20"
+            android:text="@string/Email"
+            android:textSize="@dimen/txt_size_30sp"
+            />
+
+        <TextView
+            android:id="@+id/txt_fragment_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top20"
+            android:text="@string/State"
+            android:textSize="@dimen/txt_size_30sp"
+            />
+
+        <TextView
+            android:id="@+id/txt_fragment_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top20"
+            android:text="@string/City"
+            android:textSize="@dimen/txt_size_30sp"
+            />
+
+        <TextView
+            android:id="@+id/txt_fragment_mobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top20"
+            android:text="@string/Phone"
+            android:textSize="@dimen/txt_size_30sp"
+            />
+    </LinearLayout>
+
+</LinearLayout>

@@ -10,4 +10,7 @@
 
     <color name="colorPurple_A400">#D500F9</color>
     <color name="colorPurple_900">#4A148C</color>
+    <color name="PeachPuff">#FFDAB9</color>
+    <color name="Black">#000000</color>
+    <color name="Yellow">#FFFF00</color>
 </resources>

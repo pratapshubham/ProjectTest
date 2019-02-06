@@ -9,6 +9,10 @@ public class UserModel {
     private String mobile;
     private String password;
 
+    public UserModel()
+    {
+
+    }
 
     public UserModel (String name, String email, String state, String city,String mobile,String password)
     {

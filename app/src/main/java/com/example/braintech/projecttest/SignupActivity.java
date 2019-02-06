@@ -1,7 +1,9 @@
 package com.example.braintech.projecttest;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,47 +36,58 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
     private ApiInterface apiInterface;
     ArrayAdapter<String> adapter;
     ArrayList<Datum> data ;
+    DatabaseHandlerClass finalDatabaseHandler;
+    SharedPreferences sharedpreferences;
+    CountryModel country;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
         setTitle("SignUp Form ");
-
+        DatabaseHandlerClass databaseHandler = new DatabaseHandlerClass(getApplicationContext());
+        Temp.setDatabaseHandler(databaseHandler);
+        finalDatabaseHandler = Temp.getDatabaseHandler();
         getAllid();
+        getAllCountry();
+        manageClickEvent();
 
+         spn_state.setOnItemSelectedListener(this);
+    }
+
+    private void getAllCountry(){
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
         Call<CountryModel> call = apiInterface.getCountryname();
 
-      call.enqueue(new Callback<CountryModel>() {
-          @Override
-          public void onResponse(Call<CountryModel> call, Response<CountryModel> response) {
-              CountryModel country =  response.body();
-              data = (ArrayList<Datum>) country.getData();
-              Log.d("List size------>",data.size()+"");
-              String[] items = new String[data.size()];
-              for(int i=0;i<data.size();i++)
-              {
-                  items[i] = data.get(i).getName();
-              }
-              adapter = new ArrayAdapter<String>(getApplication(), android.R.layout.simple_list_item_1, items);
-              spn_state.setAdapter(adapter);
-          }
+        call.enqueue(new Callback<CountryModel>() {
+            @Override
+            public void onResponse(Call<CountryModel> call, Response<CountryModel> response) {
+                country =  response.body();
+                setCountryAdapter();
+            }
 
-          @Override
-          public void onFailure(Call<CountryModel> call, Throwable t) {
+            @Override
+            public void onFailure(Call<CountryModel> call, Throwable t) {
 
-          }
-      });
+            }
+        });
 
 
-        DatabaseHandlerClass databaseHandler = new DatabaseHandlerClass(getApplicationContext());
-        Temp.setDatabaseHandler(databaseHandler);
-        databaseHandler = Temp.getDatabaseHandler();
+    }
 
-        final DatabaseHandlerClass finalDatabaseHandler = databaseHandler;
+    public void setCountryAdapter(){
+        data = (ArrayList<Datum>) country.getData();
+        Log.d("List size------>",data.size()+"");
+        String[] items = new String[data.size()];
+        for(int i=0;i<data.size();i++)
+        {
+            items[i] = data.get(i).getName();
+        }
+        adapter = new ArrayAdapter<String>(getApplication(), android.R.layout.simple_list_item_1, items);
+        spn_state.setAdapter(adapter);
+    }
 
-
+    private void manageClickEvent(){
         button_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,6 +115,7 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
                             editText_phone.getText().clear();
                             edt_password.getText().clear();
                             Toast.makeText(getApplication(), "Data Inserted", Toast.LENGTH_SHORT).show();
+                            finish();
                         }
                     }
                     else
@@ -111,8 +125,6 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
                 }
             }
         });
-
-         spn_state.setOnItemSelectedListener(this);
     }
 
 
@@ -159,6 +171,8 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
         button_signup = (Button)findViewById(R.id.btn_Signup);
         spn_state = (Spinner) findViewById(R.id.spinner_state);
         spn_city = (Spinner)findViewById(R.id.spinner_city);
+        sharedpreferences = getSharedPreferences(Const.MyPREFERENCES, Context.MODE_PRIVATE);
+
     }
 
 

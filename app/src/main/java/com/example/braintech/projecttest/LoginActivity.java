@@ -1,6 +1,8 @@
 package com.example.braintech.projecttest;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -20,15 +22,15 @@ public class LoginActivity extends AppCompatActivity {
     TextView txt_signup;
     Button btnLogin;
     String str_username,str_password;
+    SharedPreferences sharedpreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         setTitle("Login Form");
-
         getId();
-
+        checkLogin();
         DatabaseHandlerClass databaseHandler = new DatabaseHandlerClass(getApplicationContext());
         Temp.setDatabaseHandler(databaseHandler);
         databaseHandler = Temp.getDatabaseHandler();
@@ -48,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(new Intent(LoginActivity.this,HomepageActivity.class));
                     edt_username.getText().clear();
                     edt_password.getText().clear();
+                    savePref();
                     }
                     else
                     {
@@ -65,13 +68,21 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
+    public void  savePref()
+    {
+        SharedPreferences.Editor editor = sharedpreferences.edit();
 
+        editor.putString(Const.EMAIL, str_username);
+        editor.putString(Const.PASSWORD, str_password);
+        editor.commit();
+    }
     public void getId()
     {
         edt_username = (EditText) findViewById(R.id.edt_username);
         edt_password = (EditText)findViewById(R.id.edt_password);
         btnLogin = (Button)findViewById(R.id.btn_Login);
         txt_signup = (TextView)findViewById(R.id.txt_SignUp);
+        sharedpreferences = getSharedPreferences(Const.MyPREFERENCES, Context.MODE_PRIVATE);
     }
 
     public Boolean Validate()
@@ -94,5 +105,15 @@ public class LoginActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+    private void checkLogin()
+    {
+        String email = sharedpreferences.getString(Const.EMAIL,null);
+        String password = sharedpreferences.getString(Const.PASSWORD,null);
+        if(email !=null)
+        {
+            startActivity( new Intent(this,HomepageActivity.class));
+
+        }
     }
 }

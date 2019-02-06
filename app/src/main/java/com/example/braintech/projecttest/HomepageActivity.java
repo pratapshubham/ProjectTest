@@ -1,12 +1,16 @@
 package com.example.braintech.projecttest;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,18 +22,20 @@ public class HomepageActivity extends AppCompatActivity implements NavigationVie
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle toggle;
     NavigationView navigationView;
-    BottomNavigationView bottomNavigationView;
+    SharedPreferences sharedpreferences;
+    Fragment homefragment;
+
+    TabLayout tabLayout;
+    AlertDialog.Builder builder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
 
-        drawerLayout = (DrawerLayout)findViewById(R. id.drawerlayout);
-        navigationView = (NavigationView)findViewById(R.id.navigationView);
-        navigationView.setNavigationItemSelectedListener(this);
+        getId();
 
-        bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(selectItem);
+        enterDetails();
+        addFragment(new HomeFragment());
 
         toggle = new ActionBarDrawerToggle(this,drawerLayout,R.string.nav_open,R.string.nav_close);
 
@@ -37,24 +43,51 @@ public class HomepageActivity extends AppCompatActivity implements NavigationVie
         toggle.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch (tab.getPosition())
+                {
+                    case 0:
+                        homefragment = new HomeFragment();
+                        loadFragment(homefragment);
+                        break;
+                    case 1:
+                        homefragment = new ProfileFragment();
+                        loadFragment(homefragment);
+                        break;
+
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener selectItem
-            = new BottomNavigationView.OnNavigationItemSelectedListener(){
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-            Fragment homefragment;
-            switch (menuItem.getItemId())
-            {
-                case R.id.bottom_homeMenu:
-                    Log.d("LoadFragment-------->","Switch.....");
-                    homefragment = new HomeFragment();
-                    loadFragment(homefragment);
-            }
-           return false ;
-        }
-    };
+    public void enterDetails()
+    {
+        TabLayout.Tab Home = tabLayout.newTab();
+        Home.setIcon(R.drawable.drawer_home);
+        Home.setText("Home");
+        tabLayout.addTab(Home);
+
+        TabLayout.Tab Profile = tabLayout.newTab();
+        Profile.setIcon(R.drawable.bottom_profile_clipart);
+        Profile.setText("Profile");
+        tabLayout.addTab(Profile);
+
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -63,29 +96,58 @@ public class HomepageActivity extends AppCompatActivity implements NavigationVie
         return super.onOptionsItemSelected(item);
     }
 
+
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
         if (menuItem.getItemId() == R.id.homeMenu)
         {
-            Log.d("Drawer-------->","Home.....");
+
             Toast.makeText(getApplication(),"Welcome Home",Toast.LENGTH_SHORT).show();
         }
         else if (menuItem.getItemId() == R.id.Logout)
         {
             Log.d("Drawer-------->","Logout.....");
             Toast.makeText(getApplication(),"Logout Successfull",Toast.LENGTH_SHORT).show();
+            clearPref();
+            finish();
         }
         return false;
     }
+    private void clearPref()
+    {
+        SharedPreferences.Editor editor = sharedpreferences.edit();
 
+        editor.putString(Const.EMAIL, null);
+        editor.putString(Const.PASSWORD, null);
+        editor.commit();
+    }
+
+    private void addFragment(Fragment fragment)
+    {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.drawerlayout, fragment);
+       // transaction.addToBackStack(null);
+        transaction.commit();
+    }
     private void loadFragment(Fragment fragment) {
         // load fragment
 
         Log.d("LoadFragment-------->","Loading.....");
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.drawerlayout, fragment);
-        transaction.addToBackStack(null);
+       /* transaction.addToBackStack(null);*/
         transaction.commit();
+    }
+
+
+    public void getId()
+    {
+        drawerLayout = (DrawerLayout)findViewById(R. id.drawerlayout);
+        navigationView = (NavigationView)findViewById(R.id.navigationView);
+        navigationView.setNavigationItemSelectedListener(this);
+        sharedpreferences = getSharedPreferences(Const.MyPREFERENCES, Context.MODE_PRIVATE);
+        tabLayout = (TabLayout) findViewById(R.id.tablayout);
     }
 }
