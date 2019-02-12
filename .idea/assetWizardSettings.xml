@@ -67,7 +67,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/social/ic_person_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/image/ic_details_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -77,8 +77,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="4e999e" />
-                            <entry key="outputName" value="bottom_profile_clipart" />
+                            <entry key="color" value="9e4e36" />
+                            <entry key="outputName" value="dropdown" />
                             <entry key="sourceFile" value="C:\Users\Braintech" />
                           </map>
                         </option>

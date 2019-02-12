@@ -1,8 +1,11 @@
 package com.example.braintech.projecttest;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -28,13 +31,51 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        setTitle("Login Form");
         getId();
         checkLogin();
+        login();
+
+        signUp();
+
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+        builder.setMessage("Do you want to exit ?");
+        builder.setCancelable(true);
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    public void signUp()
+    {
+        txt_signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this,SignupActivity.class));
+            }
+        });
+    }
+
+    public void login()
+    {
         DatabaseHandlerClass databaseHandler = new DatabaseHandlerClass(getApplicationContext());
         Temp.setDatabaseHandler(databaseHandler);
         databaseHandler = Temp.getDatabaseHandler();
-
         final DatabaseHandlerClass finalDatabaseHandler = databaseHandler;
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,10 +88,11 @@ public class LoginActivity extends AppCompatActivity {
 
                     if (authenticateuser == true)
                     {
-                    startActivity(new Intent(LoginActivity.this,HomepageActivity.class));
-                    edt_username.getText().clear();
-                    edt_password.getText().clear();
-                    savePref();
+                        startActivity(new Intent(LoginActivity.this,HomepageActivity.class));
+                        edt_username.getText().clear();
+                        edt_password.getText().clear();
+                        savePref();
+                        finish();
                     }
                     else
                     {
@@ -59,23 +101,18 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-        txt_signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this,SignupActivity.class));
-            }
-        });
-
-
     }
+
+
     public void  savePref()
     {
         SharedPreferences.Editor editor = sharedpreferences.edit();
-
         editor.putString(Const.EMAIL, str_username);
         editor.putString(Const.PASSWORD, str_password);
         editor.commit();
     }
+
+
     public void getId()
     {
         edt_username = (EditText) findViewById(R.id.edt_username);
@@ -84,6 +121,7 @@ public class LoginActivity extends AppCompatActivity {
         txt_signup = (TextView)findViewById(R.id.txt_SignUp);
         sharedpreferences = getSharedPreferences(Const.MyPREFERENCES, Context.MODE_PRIVATE);
     }
+
 
     public Boolean Validate()
     {
@@ -106,6 +144,8 @@ public class LoginActivity extends AppCompatActivity {
         }
         return true;
     }
+
+
     private void checkLogin()
     {
         String email = sharedpreferences.getString(Const.EMAIL,null);

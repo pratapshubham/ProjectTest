@@ -4,11 +4,13 @@ import com.example.braintech.projecttest.DatabaseHandlerClass;
 
 public class Temp {
 
-    public static DatabaseHandlerClass getDatabaseHandler() {
+    public static DatabaseHandlerClass getDatabaseHandler()
+    {
         return databaseHandler;
     }
 
-    public static void setDatabaseHandler(DatabaseHandlerClass databaseHandler) {
+    public static void setDatabaseHandler(DatabaseHandlerClass databaseHandler)
+    {
         Temp.databaseHandler = databaseHandler;
     }
 

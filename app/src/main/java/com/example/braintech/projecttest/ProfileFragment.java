@@ -47,6 +47,7 @@ View view;
         txt_fragment_city.setText(userModel.getCity());
         txt_fragment_mobile.setText(userModel.getMobile());
     }
+
     public void getallId()
     {
         txt_fragment_Username = view.findViewById(R.id.txt_fragment_Username);

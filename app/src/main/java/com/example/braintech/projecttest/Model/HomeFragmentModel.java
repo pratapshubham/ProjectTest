@@ -30,7 +30,9 @@ public class HomeFragmentModel
         public void setData(Data data) {
             this.data = data;
         }
-    public class Data {
+
+
+    public static class Data {
 
         @SerializedName("filter_data")
         @Expose
@@ -54,6 +56,8 @@ public class HomeFragmentModel
         public void setProducts(List<Product> products) {
             this.products = products;
         }
+
+
         public class FilterData {
 
             @SerializedName("category")
@@ -158,7 +162,7 @@ public class HomeFragmentModel
 
         }
 
-        public class Product {
+        public static class Product {
 
             @SerializedName("product_id")
             @Expose

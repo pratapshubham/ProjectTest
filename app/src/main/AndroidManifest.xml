@@ -20,9 +20,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".SignupActivity" />
-        <activity android:name=".HomepageActivity"></activity>
+        <activity android:name=".LoginActivity"
+            android:theme="@style/SplashTheme"
+            />
+        <activity android:name=".SignupActivity"
+            android:theme="@style/SplashTheme"/>
+
+        <activity android:name=".HomepageActivity"
+           >
+
+        </activity>
     </application>
 
 </manifest>

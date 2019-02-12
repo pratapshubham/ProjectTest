@@ -10,17 +10,18 @@
 
         <ImageView
             android:id="@+id/img_navigation"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
            android:src="@mipmap/img_navigation_drawer"
             />
 
     <TextView
         android:id="@+id/txt_displayName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_top5"
         android:text="@string/drawer_name"
+        android:textAlignment="center"
         android:textSize="@dimen/text_size20"
         android:textColor="@color/white"
         android:textStyle="bold"

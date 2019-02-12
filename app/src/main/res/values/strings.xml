@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">ProjectTest</string>
+    <string name="facebook_app_id">330739044229585</string>
+    <string name="fb_login_protocol_scheme">fb330739044229585</string>
+
+
+
     <string name="Welcome_Splash">Welcome To Application</string>
     <string name="Username">Username</string>
     <string name="Password">Password</string>
@@ -8,27 +13,19 @@
     <string name="SignUpform">SignUp Form</string>
     <string name="Name">Name </string>
     <string name="Email">Email </string>
+    <string name="Country">Country </string>
     <string name="State">State </string>
-    <string name="City">City </string>
     <string name="Phone">Mobile.No </string>
     <string name="drawer_name">Shubham Pratap</string>
+    <string name="mobile">Phone </string>
+    <string name="already_register">Already registered ? Click here</string>
 
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
 
-    <string-array name="uttar_pradesh_city">
-        <item>Choose City</item>
-        <item>Agra</item>
-        <item>Aligarh</item>
-        <item>Firozabad</item>
-        <item>Mathura</item>
-        <item>Shikohabad</item>
+    <string-array name="Country">
+        <item name="Choose_Country">Choose Country</item>
     </string-array>
-
-    <string-array name="state">
-        <item name="Choose_State">Choose State</item>
-    </string-array>
-
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

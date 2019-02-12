@@ -101,6 +101,25 @@ public class DatabaseHandlerClass extends SQLiteOpenHelper {
         return userModel;
     }
 
+
+    public UserModel displayusername (String email)
+    {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("select * from User where Email=?",new String[]{email});
+        UserModel userModel = new UserModel();
+        if (cursor.moveToFirst())
+        {
+            cursor.moveToFirst();
+            userModel.setName(cursor.getString(1));
+            cursor.close();
+        }
+        else {
+            userModel = null;
+        }
+        sqLiteDatabase.close();
+        return userModel;
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
