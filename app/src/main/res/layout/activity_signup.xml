@@ -73,13 +73,28 @@
                  android:layout_below="@+id/txt_email"
                  android:layout_marginTop="@dimen/margin_top5"
                  android:background="@drawable/edt_bg"
+                 android:textColor="@color/white"
+                 android:textColorHint="@color/white"
+                 android:inputType="textEmailAddress"
+                 android:paddingLeft="@dimen/padding_20"
+                 android:drawableLeft="@drawable/email_clipart"
+                 android:drawablePadding="@dimen/padding_10dp"
+                 />
+
+             <!--<EditText
+                 android:id="@+id/edt_email"
+                 android:layout_width="match_parent"
+                 android:layout_height="@dimen/editTextHeight"
+                 android:layout_below="@+id/txt_email"
+                 android:layout_marginTop="@dimen/margin_top5"
+                 android:background="@drawable/edt_bg"
                  android:inputType="textEmailAddress"
                  android:paddingLeft="@dimen/padding_20"
                  android:maxLines="1"
                  android:textColor="@color/white"
                  android:drawableLeft="@drawable/email_clipart"
                  android:drawablePadding="@dimen/padding_10dp"
-                 />
+                 />-->
 
              <TextView
                  android:id="@+id/txt_state"

@@ -31,6 +31,7 @@ import com.example.braintech.projecttest.Model.StateModel;
 import com.example.braintech.projecttest.Model.Temp;
 import com.example.braintech.projecttest.Model.UserModel;
 import com.example.braintech.projecttest.common.AdapterSpinner;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -65,7 +66,7 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
 
     ArrayList<String> stateItem;
 
-
+    public static final String GOOGLE_ACCOUNT = "google_account";
 
     //-------------------------
 
@@ -87,15 +88,10 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
         finalDatabaseHandler = Temp.getDatabaseHandler();
 
         getAllid();
-
-       /*setCountryInitialAdapter();*/
-
+        setDataView();
         checkIn();
-
         getAllCountry();
-
         manageClickEvent();
-
         alreadyUser();
 
          spn_state.setOnItemSelectedListener(this);
@@ -103,6 +99,14 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
          spn_city.setOnItemSelectedListener(this);
     }
 
+    private void setDataView()
+    {
+        GoogleSignInAccount googleSignInAccount = getIntent().getParcelableExtra(GOOGLE_ACCOUNT);
+        editext_name.setText(googleSignInAccount.getDisplayName());
+        editText_email.setText(googleSignInAccount.getEmail());
+        usr_email = editText_email.getText().toString();
+
+    }
 
    private void checkIn()
    {
@@ -224,15 +228,17 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
                 usr_phone = editText_phone.getText().toString();
                 usr_password = edt_password.getText().toString();
                 usr_state = spn_state.getSelectedItem().toString();
-                usr_city = spn_city.getSelectedItem().toString();
+
                 if (validation())
                 {
-                    if (spn_state.getSelectedItemPosition() == 0 || spn_city.getSelectedItemPosition() == 0)
+                    usr_city = spn_city.getSelectedItem().toString();
+                    if (spn_state.getSelectedItemPosition() == 0 || spn_city.getSelectedItemPosition() == 0 || usr_city == null)
                     {
                         Toast.makeText(getApplicationContext(),"Invalid Country or State",Toast.LENGTH_SHORT).show();
                     }
                     else
                     {
+
                         UserModel userModel = new UserModel(usr_name,usr_email,usr_state,usr_city,usr_phone,usr_password);
                         userModel.setName(usr_name);
                         userModel.setEmail(usr_email);
@@ -262,6 +268,7 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
                         }
                         else
                         {
+
                             Toast.makeText(getApplication(), "Email Already Exists", Toast.LENGTH_SHORT).show();
                         }
                     }

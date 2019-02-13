@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.braintech.projecttest.Model.UserModel;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 public class HomepageActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -35,6 +36,7 @@ public class HomepageActivity extends AppCompatActivity implements NavigationVie
     Fragment homefragment;
     TextView txt_displayname;
     TabLayout tabLayout;
+    GoogleApiClient googleApiClient;
     AlertDialog.Builder builder;
     SharedPreferences sharedPreferences;
     DatabaseHandlerClass databaseHandlerClass;

@@ -28,6 +28,9 @@
     <dimen name="layout_height_160dp">160dp</dimen>
 
     <dimen name="margin_bottom_80dp">80dp</dimen>
+
+    <dimen name="margin_top_10dp">10dp</dimen>
+    <dimen name="margin_bottom_20dp">20dp</dimen>
     <dimen name="layout_height_350dp">350dp</dimen>
     <dimen name="padding_10dp">10dp</dimen>
 </resources>
